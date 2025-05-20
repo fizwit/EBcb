@@ -19,9 +19,9 @@ ARG EBUSER_UID
 ARG EBUSER_GID
 ARG EB_VER
 ARG TZ
+ENV TZ=${TZ}
 ARG LMOD_VER
 ENV LMOD_VER=${LMOD_VER}
-ENV TZ=${TZ}
 ARG LANG=LANG
 ENV LANG=${LANG}
 ARG EB_CFG
@@ -97,7 +97,7 @@ RUN  chown -R ${EBUSER_UID}:${EBUSER_GID} ${BUILD_DIR}
 #   save original EasyBuild.lua so it can be re-configured to build target /app
 RUN \
     mkdir -p ${CB_PREFIX}/build ${CB_PREFIX}/modules ${CB_PREFIX}/easybuild.d && \
-    cp ${BUILD_DIR}/scripts/${EB_CFG} ${CB_PREFIX}/easybuild.d/config.cfg && \
+    cp ${BUILD_DIR}/scripts/config.cfg ${CB_PREFIX}/easybuild.d/config.cfg && \
     chown -R $EBUSER_UID:$EBUSER_GID ${CB_PREFIX} && \
 #-- Install LMod local
     /bin/bash ${BUILD_DIR}/scripts/install_lmod.sh $LMOD_VER ${CB_PREFIX} && \
